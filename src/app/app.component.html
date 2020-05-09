@@ -1,1 +1,15 @@
-<router-outlet></router-outlet>
+<header>
+  <h1>Pathfinder 9.0</h1>
+  <nav>
+    <ul>
+      <li *ngFor="let route of routes">
+        <a [routerLink]="route">
+          {{ route }}
+        </a>
+      </li>
+    </ul>
+  </nav>
+</header>
+<main>
+  <router-outlet></router-outlet>
+</main>
