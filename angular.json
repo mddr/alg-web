@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "alg-web"
+    }
+  },
+  "defaultProject": "alg-web",
+  "cli": {
+    "defaultCollection": "@datorama/akita"
+  }
 }

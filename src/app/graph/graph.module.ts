@@ -3,9 +3,10 @@ import { CommonModule } from '@angular/common';
 
 import { GraphRoutingModule } from './graph-routing.module';
 import { CONTAINERS } from './containers';
+import { COMPONENTS } from './components';
 
 @NgModule({
-  declarations: [...CONTAINERS],
+  declarations: [...CONTAINERS, ...COMPONENTS],
   imports: [CommonModule, GraphRoutingModule],
 })
 export class GraphModule {}

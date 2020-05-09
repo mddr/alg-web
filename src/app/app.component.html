@@ -1,15 +1,17 @@
-<header>
-  <h1>Pathfinder 9.0</h1>
-  <nav>
-    <ul>
-      <li *ngFor="let route of routes">
-        <a [routerLink]="route">
-          {{ route }}
-        </a>
-      </li>
-    </ul>
-  </nav>
-</header>
-<main>
-  <router-outlet></router-outlet>
-</main>
+<div class="app">
+  <header class="app__header">
+    <h1 class="app__label">Pathfinder 9.0</h1>
+    <nav class="app__nav">
+      <ul class="app__nav-list">
+        <li *ngFor="let route of routes" class="app__nav-item">
+          <a class="app__nav-link" [routerLink]="route">
+            {{ route }}
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+  <main class="app__main">
+    <router-outlet></router-outlet>
+  </main>
+</div>
