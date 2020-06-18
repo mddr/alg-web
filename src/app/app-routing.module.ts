@@ -1,23 +1,22 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { GraphRoute, UploadRoute } from '@consts';
+import { RealGraphRoute, TestGraphRoute } from '@consts';
 
 const routes: Routes = [
   {
-    path: UploadRoute,
+    path: RealGraphRoute,
     loadChildren: () =>
-      import('./upload/upload.module').then((m) => m.UploadModule),
+      import('./real-graph/real-graph.module').then((m) => m.RealGraphModule),
   },
   {
-    path: GraphRoute,
+    path: TestGraphRoute,
     loadChildren: () =>
-      import('./graph/graph.module').then((m) => m.GraphModule),
+      import('./test-graph/test-graph.module').then((m) => m.TestGraphModule),
   },
-
   {
     path: '**',
-    redirectTo: GraphRoute,
+    redirectTo: TestGraphRoute,
   },
 ];
 

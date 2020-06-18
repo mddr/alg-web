@@ -1,2 +1,2 @@
-export const UploadRoute = 'upload';
-export const GraphRoute = 'graph';
+export const TestGraphRoute = 'graph/test';
+export const RealGraphRoute = 'graph/real';

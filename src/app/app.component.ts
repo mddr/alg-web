@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { GraphRoute, UploadRoute } from '@consts';
+import { RealGraphRoute, TestGraphRoute } from '@consts';
 
 @Component({
   selector: 'app-root',
@@ -8,5 +8,8 @@ import { GraphRoute, UploadRoute } from '@consts';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  readonly routes = [UploadRoute, GraphRoute];
+  readonly routes = [
+    { route: TestGraphRoute, name: 'Test data' },
+    { route: RealGraphRoute, name: 'Real data' },
+  ];
 }

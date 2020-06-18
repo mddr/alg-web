@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { UploadShellComponent } from './containers';
+import { TestGraphShellComponent } from './containers';
 
 const routes: Routes = [
   {
     path: '',
-    component: UploadShellComponent,
+    component: TestGraphShellComponent,
   },
 ];
 
@@ -14,4 +14,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class UploadRoutingModule {}
+export class TestGraphRoutingModule {}

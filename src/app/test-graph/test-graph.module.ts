@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { GraphRoutingModule } from './graph-routing.module';
+import { TestGraphRoutingModule } from './test-graph-routing.module';
 import { CONTAINERS } from './containers';
 import { COMPONENTS } from './components';
 
 @NgModule({
   declarations: [...CONTAINERS, ...COMPONENTS],
-  imports: [CommonModule, GraphRoutingModule],
+  imports: [CommonModule, TestGraphRoutingModule],
 })
-export class GraphModule {}
+export class TestGraphModule {}
