@@ -22,6 +22,7 @@ export interface Neighbour {
 
 export interface AlgorithmResult {
   algorithm: AlgorithmType;
+  timeMs: number;
   nodes: number[];
   weightsSum: number;
   distance: number;

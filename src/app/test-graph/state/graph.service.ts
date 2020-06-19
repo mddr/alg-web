@@ -27,10 +27,16 @@ export class GraphService {
       .set('min', minProfit.toString());
 
     this.graphStore.setLoading(true);
+
+    const startTime = performance.now();
     return this.http
       .get<AlgorithmResult>(`${environment.apiUrl}/path/ils`, { params })
       .pipe(
-        map((result) => ({ ...result, algorithm: AlgorithmType.ILS })),
+        map((result) => ({
+          ...result,
+          algorithm: AlgorithmType.ILS,
+          timeMs: performance.now() - startTime,
+        })),
         tap((result) => {
           this.graphStore.saveResult(result);
           this.graphStore.setLoading(false);
@@ -44,10 +50,16 @@ export class GraphService {
       .set('min', minProfit.toString());
 
     this.graphStore.setLoading(true);
+
+    const startTime = performance.now();
     return this.http
       .get<AlgorithmResult>(`${environment.apiUrl}/path/vns`, { params })
       .pipe(
-        map((result) => ({ ...result, algorithm: AlgorithmType.VNS })),
+        map((result) => ({
+          ...result,
+          algorithm: AlgorithmType.VNS,
+          timeMs: performance.now() - startTime,
+        })),
         tap((result) => {
           this.graphStore.saveResult(result);
           this.graphStore.setLoading(false);

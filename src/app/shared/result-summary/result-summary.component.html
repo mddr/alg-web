@@ -11,7 +11,7 @@
     <strong
       class="result-summary__value"
       [ngClass]="{
-        'result-summary__value--correct': result.weightsSum > minProfit
+        'result-summary__value--correct': result.weightsSum >= minProfit
       }"
     >
       {{ result.weightsSum }}
@@ -37,6 +37,13 @@
     <small *ngIf="displayPerfect" class="result-summary__info">
       Optimal distance: {{ optimalDistance }}
     </small>
+  </p>
+
+  <p class="result-summary__title">
+    Time:
+    <strong class="result-summary__value">
+      {{ result.timeMs / 1000 | number: '1.2-2' }}s
+    </strong>
   </p>
 
   <p class="result-summary__title">
