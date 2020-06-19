@@ -26,6 +26,7 @@
         [points]="points$ | async"
         [pathIds]="(result$ | async)?.nodes"
         [highlightedPointId]="highlightedPointId$ | async"
+        (pointSelect)="onPointSelect($event)"
       ></app-graph>
     </ng-container>
   </div>

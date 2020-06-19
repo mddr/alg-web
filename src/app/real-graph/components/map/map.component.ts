@@ -1,13 +1,15 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  EventEmitter,
   Input,
   OnInit,
+  Output,
 } from '@angular/core';
+import * as L from 'leaflet';
 import { latLng, Layer, marker, polyline, tileLayer } from 'leaflet';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { filter, map, withLatestFrom } from 'rxjs/operators';
-import * as L from 'leaflet';
 
 import { Point } from '@models';
 
@@ -27,6 +29,7 @@ export class MapComponent implements OnInit {
   @Input() set highlightedPointId(value: number) {
     this.highlightedPointId$.next(value);
   }
+  @Output() pointSelect = new EventEmitter<Point>();
 
   private pathIds$ = new BehaviorSubject<number[]>([]);
   private highlightedPointId$ = new BehaviorSubject<number>(null);
@@ -42,9 +45,12 @@ export class MapComponent implements OnInit {
     filter((p) => p && !!p.length),
     map((points) =>
       points.map((p) =>
-        marker([p.latitude, p.longtitude], {
+        L.marker([p.latitude, p.longtitude], {
           title: p.name.replace('_', ' '),
           opacity: 0.5,
+          interactive: true,
+        }).on('click', () => {
+          this.selectPoint(p);
         })
       )
     )
@@ -120,5 +126,9 @@ export class MapComponent implements OnInit {
       l.addTo(this.renderedMap);
       this.highlightedPointLayer = l;
     });
+  }
+
+  selectPoint(point: Point) {
+    this.pointSelect.emit(point);
   }
 }

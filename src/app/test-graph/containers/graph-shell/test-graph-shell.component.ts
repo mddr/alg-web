@@ -47,6 +47,10 @@ export class TestGraphShellComponent implements OnInit, OnDestroy {
     return p ? p.id : '';
   }
 
+  onPointSelect(point: Point) {
+    this.pathForm.get('startingPoint').setValue(point);
+  }
+
   runIls() {
     this.pathForm.markAllAsTouched();
     this.pathForm.get('startingPoint').updateValueAndValidity();

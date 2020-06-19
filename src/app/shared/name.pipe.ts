@@ -5,6 +5,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class NamePipe implements PipeTransform {
   transform(value: any): string {
-    return typeof value === 'string' ? value.replace('_', ' ') : value;
+    return typeof value === 'string' ? value.replace(/_/g, ' ') : value;
   }
 }

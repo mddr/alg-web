@@ -44,7 +44,7 @@ export class RealGraphShellComponent implements OnInit, OnDestroy {
   }
 
   displayWith(p: Point): string {
-    return p ? p.name.replace('_', ' ') : '';
+    return p ? p.name.replace(/_/g, ' ') : '';
   }
 
   runIls() {
@@ -71,5 +71,9 @@ export class RealGraphShellComponent implements OnInit, OnDestroy {
       minProfit,
     } = this.pathForm.value;
     this.subs.add(this.service.vns(id, minProfit).subscribe());
+  }
+
+  onPointSelect(point: Point) {
+    this.pathForm.get('startingPoint').setValue(point);
   }
 }

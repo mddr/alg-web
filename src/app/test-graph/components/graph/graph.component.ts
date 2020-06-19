@@ -3,9 +3,11 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
+  EventEmitter,
   Input,
   OnDestroy,
   OnInit,
+  Output,
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
@@ -60,6 +62,8 @@ export class GraphComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() set highlightedPointId(value: number) {
     this.highlightedPointId$.next(value);
   }
+
+  @Output() pointSelect = new EventEmitter<Point>();
 
   @ViewChild('wrapper') private wrapperEl: ElementRef<HTMLDivElement>;
   @ViewChild('chart') private svgEl: ElementRef<SVGGElement>;
@@ -125,6 +129,10 @@ export class GraphComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnDestroy(): void {
     this.onDestroy$.next();
     this.onDestroy$.complete();
+  }
+
+  selectPoint(point: Point) {
+    this.pointSelect.emit(point);
   }
 
   private initSvgSize() {
