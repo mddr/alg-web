@@ -1,16 +1,25 @@
 import { Injectable } from '@angular/core';
-import { Graph } from './graph.model';
 import { EntityState, EntityStore, StoreConfig } from '@datorama/akita';
 
-export interface GraphState extends EntityState<Graph> {}
+import { AlgorithmResult, Point } from '@models';
 
-@Injectable({ providedIn: 'root' })
-@StoreConfig({ name: 'graph' })
-export class GraphStore extends EntityStore<GraphState> {
-
-  constructor() {
-    super();
-  }
-
+export interface GraphState extends EntityState<Point> {
+  result: AlgorithmResult;
 }
 
+const initialState: GraphState = {
+  loading: true,
+  result: null,
+};
+
+@Injectable({ providedIn: 'root' })
+@StoreConfig({ name: 'real-graph' })
+export class GraphStore extends EntityStore<GraphState> {
+  constructor() {
+    super(initialState);
+  }
+
+  saveResult(result: AlgorithmResult) {
+    this.update({ result });
+  }
+}

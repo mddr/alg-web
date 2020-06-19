@@ -1,32 +1,51 @@
 import { Injectable } from '@angular/core';
-import { ID } from '@datorama/akita';
 import { HttpClient } from '@angular/common/http';
+import { map, tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+
+import { AlgorithmType, AlgorithmResult, Graph } from '@models';
+
 import { GraphStore } from './graph.store';
-import { Graph } from './graph.model';
-import { tap } from 'rxjs/operators';
+import { environment } from '../../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class GraphService {
+  constructor(private graphStore: GraphStore, private http: HttpClient) {}
 
-  constructor(private graphStore: GraphStore,
-              private http: HttpClient) {
+  fetchPoints(): Observable<Graph> {
+    return this.http
+      .get<Graph>(`${environment.apiUrl}/path/realGetPoints`)
+      .pipe(
+        tap((graph) => {
+          this.graphStore.set(graph.points);
+          this.graphStore.setLoading(false);
+        })
+      );
   }
 
-  get() {
-    return this.http.get<Graph[]>('https://api.com').pipe(tap(entities => {
-      this.graphStore.set(entities);
-    }));
+  ils(): Observable<AlgorithmResult> {
+    this.graphStore.setLoading(true);
+    return this.http
+      .get<AlgorithmResult>(`${environment.apiUrl}/path/realIls`)
+      .pipe(
+        map((result) => ({ ...result, algorithm: AlgorithmType.ILS })),
+        tap((result) => {
+          this.graphStore.saveResult(result);
+          this.graphStore.setLoading(false);
+        })
+      );
   }
 
-  add(graph: Graph) {
-    this.graphStore.add(graph);
-  }
-
-  update(id, graph: Partial<Graph>) {
-    this.graphStore.update(id, graph);
-  }
-
-  remove(id: ID) {
-    this.graphStore.remove(id);
+  vns(): Observable<AlgorithmResult> {
+    this.graphStore.setLoading(true);
+    return this.http
+      .get<AlgorithmResult>(`${environment.apiUrl}/path/realVns`)
+      .pipe(
+        map((result) => ({ ...result, algorithm: AlgorithmType.VNS })),
+        tap((result) => {
+          this.graphStore.saveResult(result);
+          this.graphStore.setLoading(false);
+        })
+      );
   }
 }

@@ -13,7 +13,7 @@ const initialState: GraphState = {
 };
 
 @Injectable({ providedIn: 'root' })
-@StoreConfig({ name: 'graph' })
+@StoreConfig({ name: 'test-graph' })
 export class GraphStore extends EntityStore<GraphState> {
   constructor() {
     super(initialState);

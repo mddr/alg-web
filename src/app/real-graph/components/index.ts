@@ -1,4 +1,3 @@
-import { GraphComponent } from './graph/graph.component';
-import { OptionsComponent } from './options/options.component';
+import { MapComponent } from './map/map.component';
 
-export const COMPONENTS = [GraphComponent, OptionsComponent];
+export const COMPONENTS = [MapComponent];
