@@ -36,10 +36,7 @@ export class TestGraphShellComponent implements OnInit, OnDestroy {
     });
     this.highlightedPointId$ = this.pathForm
       .get('startingPoint')
-      .valueChanges.pipe(
-        map((h) => (typeof h === 'string' ? +h : +h.id)),
-        tap((h) => console.log({ h }))
-      );
+      .valueChanges.pipe(map((h) => (typeof h === 'string' ? +h : +h.id)));
   }
 
   ngOnDestroy() {

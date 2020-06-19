@@ -13,7 +13,7 @@
       [displayWith]="displayWith"
     >
       <mat-option *ngFor="let point of filteredPoints$ | async" [value]="point">
-        {{ point[filterBy] }}
+        {{ point[filterBy] | name }}
       </mat-option>
     </mat-autocomplete>
 

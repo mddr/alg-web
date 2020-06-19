@@ -36,10 +36,7 @@ export class RealGraphShellComponent implements OnInit, OnDestroy {
     });
     this.highlightedPointId$ = this.pathForm
       .get('startingPoint')
-      .valueChanges.pipe(
-        map((h) => (typeof h === 'string' ? +h : +h.id)),
-        tap((h) => console.log({ h }))
-      );
+      .valueChanges.pipe(map((h) => (typeof h === 'string' ? +h : +h.id)));
   }
 
   ngOnDestroy() {
@@ -47,7 +44,7 @@ export class RealGraphShellComponent implements OnInit, OnDestroy {
   }
 
   displayWith(p: Point): string {
-    return p ? p.name : '';
+    return p ? p.name.replace('_', ' ') : '';
   }
 
   runIls() {

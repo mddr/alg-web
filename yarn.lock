@@ -237,11 +237,6 @@
   resolved "https://registry.yarnpkg.com/@angular/router/-/router-9.1.6.tgz#1186e63d3f69faffbf7f92773f342314130b1fcf"
   integrity sha512-Oz4nVQUR6t68DSzZuSrVaqrzmA7/0PIEi0sc85CE+UuOEoAqGMwN0NdQYizFT62WZ16DRI/1tZ+TTWvdmpEv8w==
 
-"@asymmetrik/ngx-leaflet@^7.0.1":
-  version "7.0.1"
-  resolved "https://registry.yarnpkg.com/@asymmetrik/ngx-leaflet/-/ngx-leaflet-7.0.1.tgz#8b1550d4927b9c6f8101dcd3bb0906782dfc6104"
-  integrity sha512-foFC3utA0kk+Ki0HcD7FL3XDNmXes/LWyWp3hr6wDNBUbMLsLHLKkvXY1HsfZDRLIw/+ha1BJIh5agLjLFqrQQ==
-
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.8.3":
   version "7.8.3"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.8.3.tgz#33e25903d7481181534e12ec0a25f16b6fcf419e"

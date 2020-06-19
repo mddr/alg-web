@@ -2,12 +2,12 @@ import {
   ChangeDetectionStrategy,
   Component,
   Input,
-  OnDestroy,
   OnInit,
 } from '@angular/core';
 import { latLng, Layer, marker, polyline, tileLayer } from 'leaflet';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { filter, map, withLatestFrom } from 'rxjs/operators';
+import * as L from 'leaflet';
 
 import { Point } from '@models';
 
@@ -17,7 +17,7 @@ import { Point } from '@models';
   styleUrls: ['./map.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MapComponent implements OnInit, OnDestroy {
+export class MapComponent implements OnInit {
   @Input() set points(value: Point[]) {
     this.points$.next(value);
   }
@@ -30,6 +30,11 @@ export class MapComponent implements OnInit, OnDestroy {
 
   private pathIds$ = new BehaviorSubject<number[]>([]);
   private highlightedPointId$ = new BehaviorSubject<number>(null);
+
+  private renderedMap: L.Map;
+  private markersLayers: Layer[];
+  private polyLinesLayer: Layer;
+  private highlightedPointLayer: Layer;
 
   points$ = new BehaviorSubject<Point[]>([]);
 
@@ -86,7 +91,34 @@ export class MapComponent implements OnInit, OnDestroy {
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.renderedMap = L.map('map').setView([52, 21.008333], 7);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution:
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    }).addTo(this.renderedMap);
 
-  ngOnDestroy() {}
+    this.markers$.subscribe((layers) => {
+      if (this.markersLayers?.length) {
+        this.markersLayers.forEach((l) => this.renderedMap.removeLayer(l));
+      }
+      this.markersLayers = layers;
+      layers.forEach((l) => l.addTo(this.renderedMap));
+    });
+    this.polyLine$.subscribe((l) => {
+      if (this.polyLinesLayer) {
+        this.renderedMap.removeLayer(this.polyLinesLayer);
+      }
+      l.addTo(this.renderedMap);
+      this.polyLinesLayer = l;
+    });
+    this.highlightedPoint$.subscribe((l) => {
+      if (this.highlightedPointLayer) {
+        this.renderedMap.removeLayer(this.highlightedPointLayer);
+      }
+      l.addTo(this.renderedMap);
+      this.highlightedPointLayer = l;
+    });
+  }
 }

@@ -6,17 +6,19 @@ import { PathOptionsComponent } from './path-options/path-options.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { NamePipe } from './name.pipe';
 
 const MODULES = [FormsModule, ReactiveFormsModule];
 
 const MATERIAL = [MatAutocompleteModule, MatFormFieldModule, MatInputModule];
 
 @NgModule({
-  declarations: [ResultSummaryComponent, PathOptionsComponent],
+  declarations: [ResultSummaryComponent, PathOptionsComponent, NamePipe],
   imports: [CommonModule, ...MODULES, ...MATERIAL],
   exports: [
     ResultSummaryComponent,
     PathOptionsComponent,
+    NamePipe,
     ...MODULES,
     ...MATERIAL,
   ],
