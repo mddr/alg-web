@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
@@ -23,10 +23,15 @@ export class GraphService {
       );
   }
 
-  ils(): Observable<AlgorithmResult> {
+  ils(start: number, min: number): Observable<AlgorithmResult> {
+    const params = new HttpParams()
+      .set('start', start.toString())
+      .set('min', min.toString());
+
+    this.graphStore.clearResult();
     this.graphStore.setLoading(true);
     return this.http
-      .get<AlgorithmResult>(`${environment.apiUrl}/path/realIls`)
+      .get<AlgorithmResult>(`${environment.apiUrl}/path/realIls`, { params })
       .pipe(
         map((result) => ({ ...result, algorithm: AlgorithmType.ILS })),
         tap((result) => {
@@ -36,10 +41,15 @@ export class GraphService {
       );
   }
 
-  vns(): Observable<AlgorithmResult> {
+  vns(start: number, min: number): Observable<AlgorithmResult> {
+    const params = new HttpParams()
+      .set('start', start.toString())
+      .set('min', min.toString());
+
+    this.graphStore.clearResult();
     this.graphStore.setLoading(true);
     return this.http
-      .get<AlgorithmResult>(`${environment.apiUrl}/path/realVns`)
+      .get<AlgorithmResult>(`${environment.apiUrl}/path/realVns`, { params })
       .pipe(
         map((result) => ({ ...result, algorithm: AlgorithmType.VNS })),
         tap((result) => {

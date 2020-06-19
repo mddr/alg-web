@@ -22,4 +22,8 @@ export class GraphStore extends EntityStore<GraphState> {
   saveResult(result: AlgorithmResult) {
     this.update({ result });
   }
+
+  clearResult() {
+    this.update({ result: null });
+  }
 }

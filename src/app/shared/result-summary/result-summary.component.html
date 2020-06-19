@@ -16,7 +16,9 @@
     >
       {{ result.weightsSum }}
     </strong>
-    <small class="result-summary__info"> Min. profit: {{ minProfit }} </small>
+    <small *ngIf="displayPerfect" class="result-summary__info">
+      Min. profit: {{ minProfit }}
+    </small>
   </p>
 
   <p class="result-summary__title">
@@ -28,9 +30,11 @@
       }"
     >
       {{ result.distance }}
-      ({{ distancePercentError | percent }} worse)
+      <ng-container *ngIf="displayPerfect">
+        ({{ distancePercentError | percent }} worse)
+      </ng-container>
     </strong>
-    <small class="result-summary__info">
+    <small *ngIf="displayPerfect" class="result-summary__info">
       Optimal distance: {{ optimalDistance }}
     </small>
   </p>

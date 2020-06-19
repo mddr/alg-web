@@ -57,11 +57,15 @@ export class GraphComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() set pathIds(value: number[]) {
     this.pathIds$.next(value);
   }
+  @Input() set highlightedPointId(value: number) {
+    this.highlightedPointId$.next(value);
+  }
 
   @ViewChild('wrapper') private wrapperEl: ElementRef<HTMLDivElement>;
   @ViewChild('chart') private svgEl: ElementRef<SVGGElement>;
 
   private pathIds$ = new BehaviorSubject<number[]>([]);
+  private highlightedPointId$ = new BehaviorSubject<number>(null);
   private wrapper$ = new BehaviorSubject<HTMLDivElement>(null);
   private onDestroy$ = new Subject<void>();
 
@@ -94,6 +98,12 @@ export class GraphComponent implements OnInit, AfterViewInit, OnDestroy {
 
       return path.toString();
     })
+  );
+
+  highlightedPoint$: Observable<Point> = this.highlightedPointId$.pipe(
+    filter((p) => !!p),
+    withLatestFrom(this.points$),
+    map(([id, points]) => points.find((p) => +p.id === id))
   );
 
   xAxis: d3.ScaleLinear<number, number>;

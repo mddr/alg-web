@@ -23,7 +23,16 @@
         <g class="graph__points">
           <circle
             *ngFor="let point of points$ | async"
+            class="graph__point graph__point--normal"
             [attr.r]="point.weight / 15"
+            [attr.cx]="xAxis(point.latitude)"
+            [attr.cy]="yAxis(point.longtitude)"
+          ></circle>
+
+          <circle
+            *ngIf="highlightedPoint$ | async as point"
+            class="graph__point graph__point--start"
+            [attr.r]="10"
             [attr.cx]="xAxis(point.latitude)"
             [attr.cy]="yAxis(point.longtitude)"
           ></circle>

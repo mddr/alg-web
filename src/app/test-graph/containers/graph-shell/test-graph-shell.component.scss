@@ -1,3 +1,9 @@
 .graph-shell {
   height: 100%;
+  display: grid;
+  grid-template-columns: 20% 1fr;
+
+  &__options {
+    padding: 0 1rem;
+  }
 }

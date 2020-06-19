@@ -15,6 +15,7 @@ import { AlgorithmResult } from '@models';
 })
 export class ResultSummaryComponent implements OnInit {
   @Input() result: AlgorithmResult;
+  @Input() displayPerfect: boolean;
 
   readonly minProfit = 12500;
   readonly maxError = 0.07;

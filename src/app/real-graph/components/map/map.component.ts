@@ -2,11 +2,12 @@ import {
   ChangeDetectionStrategy,
   Component,
   Input,
+  OnDestroy,
   OnInit,
 } from '@angular/core';
-import {  latLng, Layer, marker, polyline, tileLayer } from 'leaflet';
+import { latLng, Layer, marker, polyline, tileLayer } from 'leaflet';
 import { BehaviorSubject, Observable } from 'rxjs';
-import {  filter, map, withLatestFrom } from 'rxjs/operators';
+import { filter, map, withLatestFrom } from 'rxjs/operators';
 
 import { Point } from '@models';
 
@@ -16,15 +17,19 @@ import { Point } from '@models';
   styleUrls: ['./map.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MapComponent implements OnInit {
+export class MapComponent implements OnInit, OnDestroy {
   @Input() set points(value: Point[]) {
     this.points$.next(value);
   }
   @Input() set pathIds(value: number[]) {
     this.pathIds$.next(value);
   }
+  @Input() set highlightedPointId(value: number) {
+    this.highlightedPointId$.next(value);
+  }
 
   private pathIds$ = new BehaviorSubject<number[]>([]);
+  private highlightedPointId$ = new BehaviorSubject<number>(null);
 
   points$ = new BehaviorSubject<Point[]>([]);
 
@@ -34,6 +39,7 @@ export class MapComponent implements OnInit {
       points.map((p) =>
         marker([p.latitude, p.longtitude], {
           title: p.name.replace('_', ' '),
+          opacity: 0.5,
         })
       )
     )
@@ -46,7 +52,23 @@ export class MapComponent implements OnInit {
         const point = points.find((p) => +p.id === id);
         return latLng(point.latitude, point.longtitude);
       });
-      return polyline(coords, { color: 'red' });
+
+      const first = points.find((p) => +p.id === pathIds[0]);
+      const coordsWithFirst = [
+        ...coords,
+        latLng(first.latitude, first.longtitude),
+      ];
+      return polyline(coordsWithFirst, { color: 'red' });
+    })
+  );
+  highlightedPoint$: Observable<Layer> = this.highlightedPointId$.pipe(
+    filter((p) => !!p),
+    withLatestFrom(this.points$),
+    map(([id, points]) => {
+      const point = points.find((p) => +p.id === id);
+      return marker([point.latitude, point.longtitude], {
+        title: point.name.replace('_', ' '),
+      });
     })
   );
 
@@ -65,4 +87,6 @@ export class MapComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
+
+  ngOnDestroy() {}
 }

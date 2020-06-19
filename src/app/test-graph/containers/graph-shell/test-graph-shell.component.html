@@ -1,16 +1,34 @@
 <div class="graph-shell">
-  <ng-container *ngIf="!(loading$ | async); else loading">
-    <app-graph
+  <div class="graph-shell__options">
+    <app-path-options
+      [parentForm]="pathForm"
       [points]="points$ | async"
-      [pathIds]="(result$ | async)?.nodes"
-    ></app-graph>
-    <button (click)="runIls()">ILS</button>
-    <button (click)="runVns()">VNS</button>
+      [filterBy]="'id'"
+      [displayWith]="displayWith"
+    ></app-path-options>
+
+    <div class="graph-shell__buttons">
+      <button (click)="runIls()">ILS</button>
+      <button (click)="runVns()">VNS</button>
+    </div>
 
     <ng-container *ngIf="result$ | async as result">
-      <app-result-summary [result]="result"></app-result-summary>
+      <app-result-summary
+        [result]="result"
+        [displayPerfect]="true"
+      ></app-result-summary>
     </ng-container>
-  </ng-container>
+  </div>
+
+  <div class="graph-shell__graph">
+    <ng-container *ngIf="!(loading$ | async); else loading">
+      <app-graph
+        [points]="points$ | async"
+        [pathIds]="(result$ | async)?.nodes"
+        [highlightedPointId]="highlightedPointId$ | async"
+      ></app-graph>
+    </ng-container>
+  </div>
 </div>
 
 <ng-template #loading>

@@ -1,15 +1,30 @@
 <div class="real-graph">
+  <div class="real-graph__options">
+    <app-path-options
+      [parentForm]="pathForm"
+      [points]="points$ | async"
+      [filterBy]="'name'"
+      [displayWith]="displayWith"
+    ></app-path-options>
+
+    <div class="real-graph__buttons">
+      <button (click)="runIls()">ILS</button>
+      <button (click)="runVns()">VNS</button>
+    </div>
+
+    <ng-container *ngIf="result$ | async as result">
+      <app-result-summary
+        [result]="result"
+        [displayPerfect]="false"
+      ></app-result-summary>
+    </ng-container>
+  </div>
+
   <div class="real-graph__map">
     <app-map
       [points]="points$ | async"
       [pathIds]="(result$ | async)?.nodes"
+      [highlightedPointId]="highlightedPointId$ | async"
     ></app-map>
-  </div>
-  <div class="real-graph__controls">
-    <button (click)="runIls()">ILS</button>
-    <button (click)="runVns()">VNS</button>
-    <ng-container *ngIf="result$ | async as result">
-      <app-result-summary [result]="result"></app-result-summary>
-    </ng-container>
   </div>
 </div>

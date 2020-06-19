@@ -1,4 +1,5 @@
 <div class="app-map" leaflet [leafletOptions]="options">
   <div [leafletLayer]="polyLine$ | async"></div>
   <div [leafletLayers]="markers$ | async"></div>
+  <div [leafletLayer]="highlightedPoint$ | async"></div>
 </div>
