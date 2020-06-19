@@ -31,11 +31,18 @@
     >
       {{ result.distance }}
       <ng-container *ngIf="displayPerfect">
-        ({{ distancePercentError | percent }} worse)
+        ({{ distancePercentError | percent }} difference)
       </ng-container>
     </strong>
     <small *ngIf="displayPerfect" class="result-summary__info">
       Optimal distance: {{ optimalDistance }}
     </small>
+  </p>
+
+  <p class="result-summary__title">
+    Points:
+    <strong class="result-summary__value">
+      {{ resultNodes }}
+    </strong>
   </p>
 </div>

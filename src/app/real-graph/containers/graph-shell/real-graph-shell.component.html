@@ -16,6 +16,8 @@
       <app-result-summary
         [result]="result"
         [displayPerfect]="false"
+        [allPoints]="points$ | async"
+        [convertPoints]="true"
       ></app-result-summary>
     </ng-container>
   </div>
