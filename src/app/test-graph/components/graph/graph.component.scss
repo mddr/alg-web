@@ -1,8 +1,21 @@
 .graph {
   height: 100%;
+  background: var(--bg-light);
 
   &__curve {
     fill: none;
-    stroke: coral;
+    stroke: var(--primary);
+    stroke-width: 3;
+  }
+
+  &__point {
+    cursor: pointer;
+
+    &--normal {
+      fill: var(--font-color);
+    }
+    &--start {
+      fill: var(--warn);
+    }
   }
 }

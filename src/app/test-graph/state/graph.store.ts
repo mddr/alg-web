@@ -5,11 +5,13 @@ import { AlgorithmResult, Point } from '@models';
 
 export interface GraphState extends EntityState<Point> {
   result: AlgorithmResult;
+  loadingAlgorithm: boolean;
 }
 
 const initialState: GraphState = {
   loading: true,
   result: null,
+  loadingAlgorithm: false,
 };
 
 @Injectable({ providedIn: 'root' })
@@ -21,5 +23,13 @@ export class GraphStore extends EntityStore<GraphState> {
 
   saveResult(result: AlgorithmResult) {
     this.update({ result });
+  }
+
+  clearResult() {
+    this.update({ result: null });
+  }
+
+  setLoadingAlgorithm(value: boolean) {
+    this.update({ loadingAlgorithm: value });
   }
 }

@@ -1,4 +1,21 @@
 .result-summary {
+  margin-top: 3rem;
+
+  &__header {
+    margin-bottom: 3rem;
+    position: relative;
+    font-size: 1.4rem;
+
+    &:after {
+      content: '';
+      width: 100%;
+      position: absolute;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+      left: 0;
+      top: 2.5rem;
+    }
+  }
+
   &__value {
     &--correct {
       color: green;

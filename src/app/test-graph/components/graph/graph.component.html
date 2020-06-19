@@ -20,10 +20,15 @@
       <g class="graph__axis graph__axis--y"></g>
 
       <ng-container *ngIf="yAxis && yAxis">
+        <g *ngIf="path$ | async as path" class="graph__result">
+          <path class="graph__curve" [attr.d]="path"></path>
+        </g>
+
         <g class="graph__points">
           <circle
             *ngFor="let point of points$ | async"
             class="graph__point graph__point--normal"
+            [matTooltip]="'id: ' + point.id"
             [attr.r]="point.weight / 15"
             [attr.cx]="xAxis(point.latitude)"
             [attr.cy]="yAxis(point.longtitude)"
@@ -33,14 +38,11 @@
           <circle
             *ngIf="highlightedPoint$ | async as point"
             class="graph__point graph__point--start"
+            [matTooltip]="'id: ' + point.id"
             [attr.r]="10"
             [attr.cx]="xAxis(point.latitude)"
             [attr.cy]="yAxis(point.longtitude)"
           ></circle>
-        </g>
-
-        <g *ngIf="path$ | async as path" class="graph__result">
-          <path class="graph__curve" [attr.d]="path"></path>
         </g>
       </ng-container>
     </g>

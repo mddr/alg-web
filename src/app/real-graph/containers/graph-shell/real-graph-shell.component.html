@@ -8,8 +8,22 @@
     ></app-path-options>
 
     <div class="real-graph__buttons">
-      <button (click)="runIls()">ILS</button>
-      <button (click)="runVns()">VNS</button>
+      <button
+        class="real-graph__button"
+        mat-flat-button
+        color="primary"
+        (click)="runIls()"
+      >
+        ILS
+      </button>
+      <button
+        class="real-graph__button"
+        mat-flat-button
+        color="primary"
+        (click)="runVns()"
+      >
+        VNS
+      </button>
     </div>
 
     <ng-container *ngIf="result$ | async as result">
@@ -30,4 +44,6 @@
       (pointSelect)="onPointSelect($event)"
     ></app-map>
   </div>
+
+  <app-progress *ngIf="loadingAlgorithm$ | async"></app-progress>
 </div>

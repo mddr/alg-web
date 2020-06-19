@@ -4,7 +4,7 @@
     <nav class="app__nav">
       <ul class="app__nav-list">
         <li *ngFor="let route of routes" class="app__nav-item">
-          <a class="app__nav-link" [routerLink]="route.route">
+          <a mat-button class="app__nav-link" [routerLink]="route.route">
             {{ route.name }}
           </a>
         </li>

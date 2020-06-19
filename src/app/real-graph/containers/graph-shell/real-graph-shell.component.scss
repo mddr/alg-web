@@ -10,5 +10,16 @@
 
   &__options {
     padding: 0 1rem;
+    box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.5);
+    overflow-y: auto;
+  }
+
+  &__buttons {
+    display: flex;
+    justify-content: space-between;
+  }
+  &__button {
+    flex-grow: 1;
+    margin: 0.5rem;
   }
 }

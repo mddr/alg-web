@@ -8,8 +8,22 @@
     ></app-path-options>
 
     <div class="graph-shell__buttons">
-      <button (click)="runIls()">ILS</button>
-      <button (click)="runVns()">VNS</button>
+      <button
+        class="graph-shell__button"
+        mat-flat-button
+        color="primary"
+        (click)="runIls()"
+      >
+        ILS
+      </button>
+      <button
+        class="graph-shell__button"
+        mat-flat-button
+        color="primary"
+        (click)="runVns()"
+      >
+        VNS
+      </button>
     </div>
 
     <ng-container *ngIf="result$ | async as result">
@@ -30,8 +44,12 @@
       ></app-graph>
     </ng-container>
   </div>
+
+  <app-progress *ngIf="loadingAlgorithm$ | async"></app-progress>
 </div>
 
 <ng-template #loading>
-  Loading...
+  <div class="graph-shell__loading">
+    <mat-spinner></mat-spinner>
+  </div>
 </ng-template>

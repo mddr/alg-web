@@ -69,7 +69,7 @@ export class MapComponent implements OnInit {
         ...coords,
         latLng(first.latitude, first.longtitude),
       ];
-      return polyline(coordsWithFirst, { color: 'red' });
+      return polyline(coordsWithFirst, { color: '#e91e63' });
     })
   );
   highlightedPoint$: Observable<Layer> = this.highlightedPointId$.pipe(

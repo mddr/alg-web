@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
 
 import { GraphQuery, GraphService } from '../../state';
-import { map, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { Point } from '@models';
 
 @Component({
@@ -13,7 +13,8 @@ import { Point } from '@models';
 })
 export class RealGraphShellComponent implements OnInit, OnDestroy {
   points$ = this.query.points$;
-  loading$ = this.query.loading$;
+  loadingAlgorithm$ = this.query.loadingAlgorithm$;
+
   result$ = this.query.result$;
 
   pathForm: FormGroup;
@@ -36,7 +37,9 @@ export class RealGraphShellComponent implements OnInit, OnDestroy {
     });
     this.highlightedPointId$ = this.pathForm
       .get('startingPoint')
-      .valueChanges.pipe(map((h) => (typeof h === 'string' ? +h : +h.id)));
+      .valueChanges.pipe(
+        map((h) => (typeof h === 'string' ? +h : h ? +h.id : h))
+      );
   }
 
   ngOnDestroy() {

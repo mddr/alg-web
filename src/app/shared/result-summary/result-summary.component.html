@@ -1,12 +1,16 @@
 <div class="result-summary">
-  <p class="result-summary__title">
+  <h1 class="result-summary__header">
+    Summary
+  </h1>
+
+  <p class="result-summary__label">
     Algorithm:
     <strong class="result-summary__value">
       {{ result.algorithm | uppercase }}
     </strong>
   </p>
 
-  <p class="result-summary__title">
+  <p class="result-summary__label">
     Profit:
     <strong
       class="result-summary__value"
@@ -21,10 +25,10 @@
     </small>
   </p>
 
-  <p class="result-summary__title">
+  <p class="result-summary__label">
     Distance:
     <strong
-      class="result-summary__value"
+      class="result-summary__label"
       [ngClass]="{
         'result-summary__value--correct': distancePercentError <= maxError
       }"
@@ -39,14 +43,14 @@
     </small>
   </p>
 
-  <p class="result-summary__title">
+  <p class="result-summary__label">
     Time:
     <strong class="result-summary__value">
       {{ result.timeMs / 1000 | number: '1.2-2' }}s
     </strong>
   </p>
 
-  <p class="result-summary__title">
+  <p class="result-summary__label">
     Points:
     <strong class="result-summary__value">
       {{ resultNodes }}

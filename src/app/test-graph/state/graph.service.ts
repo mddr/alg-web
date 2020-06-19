@@ -26,7 +26,8 @@ export class GraphService {
       .set('start', startingPoint.toString())
       .set('min', minProfit.toString());
 
-    this.graphStore.setLoading(true);
+    this.graphStore.clearResult();
+    this.graphStore.setLoadingAlgorithm(true);
 
     const startTime = performance.now();
     return this.http
@@ -39,7 +40,7 @@ export class GraphService {
         })),
         tap((result) => {
           this.graphStore.saveResult(result);
-          this.graphStore.setLoading(false);
+          this.graphStore.setLoadingAlgorithm(false);
         })
       );
   }
@@ -49,7 +50,8 @@ export class GraphService {
       .set('start', startingPoint.toString())
       .set('min', minProfit.toString());
 
-    this.graphStore.setLoading(true);
+    this.graphStore.clearResult();
+    this.graphStore.setLoadingAlgorithm(true);
 
     const startTime = performance.now();
     return this.http
@@ -62,7 +64,7 @@ export class GraphService {
         })),
         tap((result) => {
           this.graphStore.saveResult(result);
-          this.graphStore.setLoading(false);
+          this.graphStore.setLoadingAlgorithm(false);
         })
       );
   }

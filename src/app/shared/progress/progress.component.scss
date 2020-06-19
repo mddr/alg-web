@@ -1,0 +1,13 @@
+$height: 0.75rem;
+
+:host {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  z-index: 1001;
+  height: $height;
+}
+
+.app-progress {
+  height: $height;
+}

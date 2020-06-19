@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { map, shareReplay, tap } from 'rxjs/operators';
+import { map, shareReplay } from 'rxjs/operators';
 
 import { GraphQuery, GraphService } from '../../state';
 import { Observable, Subscription } from 'rxjs';
@@ -14,6 +14,7 @@ import { Point } from '@models';
 export class TestGraphShellComponent implements OnInit, OnDestroy {
   points$ = this.query.points$.pipe(shareReplay());
   loading$ = this.query.loading$.pipe(shareReplay());
+  loadingAlgorithm$ = this.query.loadingAlgorithm$;
   result$ = this.query.result$.pipe(shareReplay());
 
   pathForm: FormGroup;

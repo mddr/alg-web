@@ -6,6 +6,7 @@ import { GraphStore, GraphState } from './graph.store';
 export class GraphQuery extends QueryEntity<GraphState> {
   points$ = this.selectAll();
   loading$ = this.selectLoading();
+  loadingAlgorithm$ = this.select((state) => state.loadingAlgorithm);
 
   result$ = this.select((state) => state.result);
 
