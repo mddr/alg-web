@@ -4,9 +4,12 @@ import { GraphStore, GraphState } from './graph.store';
 
 @Injectable({ providedIn: 'root' })
 export class GraphQuery extends QueryEntity<GraphState> {
+  points$ = this.selectAll();
+  loading$ = this.selectLoading();
+
+  result$ = this.select((state) => state.result);
 
   constructor(protected store: GraphStore) {
     super(store);
   }
-
 }

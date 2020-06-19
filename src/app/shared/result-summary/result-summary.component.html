@@ -1,0 +1,37 @@
+<div class="result-summary">
+  <p class="result-summary__title">
+    Algorithm:
+    <strong class="result-summary__value">
+      {{ result.algorithm | uppercase }}
+    </strong>
+  </p>
+
+  <p class="result-summary__title">
+    Profit:
+    <strong
+      class="result-summary__value"
+      [ngClass]="{
+        'result-summary__value--correct': result.weightsSum > minProfit
+      }"
+    >
+      {{ result.weightsSum }}
+    </strong>
+    <small class="result-summary__info"> Min. profit: {{ minProfit }} </small>
+  </p>
+
+  <p class="result-summary__title">
+    Distance:
+    <strong
+      class="result-summary__value"
+      [ngClass]="{
+        'result-summary__value--correct': distancePercentError <= maxError
+      }"
+    >
+      {{ result.distance }}
+      ({{ distancePercentError | percent }} worse)
+    </strong>
+    <small class="result-summary__info">
+      Optimal distance: {{ optimalDistance }}
+    </small>
+  </p>
+</div>

@@ -1,3 +1,18 @@
 <div class="graph-shell">
-  test data
+  <ng-container *ngIf="!(loading$ | async); else loading">
+    <app-graph
+      [points]="points$ | async"
+      [pathIds]="(result$ | async)?.nodes"
+    ></app-graph>
+    <button (click)="runIls()">ILS</button>
+    <button (click)="runVns()">VNS</button>
+
+    <ng-container *ngIf="result$ | async as result">
+      <app-result-summary [result]="result"></app-result-summary>
+    </ng-container>
+  </ng-container>
 </div>
+
+<ng-template #loading>
+  Loading...
+</ng-template>

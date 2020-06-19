@@ -1,0 +1,38 @@
+<div #wrapper class="graph">
+  <svg
+    class="graph__svg"
+    [attr.width]="'100%'"
+    [attr.height]="'100%'"
+    [attr.viewBox]="svgSize$ | async | svgViewBox"
+  >
+    <g
+      #chart
+      class="graph__chart"
+      [attr.transform]="
+        'translate(' +
+        (margins$ | async).left +
+        ',' +
+        (margins$ | async).bottom +
+        ')'
+      "
+    >
+      <g class="graph__axis graph__axis--x"></g>
+      <g class="graph__axis graph__axis--y"></g>
+
+      <ng-container *ngIf="yAxis && yAxis">
+        <g class="graph__points">
+          <circle
+            *ngFor="let point of points$ | async"
+            [attr.r]="point.weight / 15"
+            [attr.cx]="xAxis(point.latitude)"
+            [attr.cy]="yAxis(point.longtitude)"
+          ></circle>
+        </g>
+
+        <g *ngIf="path$ | async as path" class="graph__result">
+          <path class="graph__curve" [attr.d]="path"></path>
+        </g>
+      </ng-container>
+    </g>
+  </svg>
+</div>
