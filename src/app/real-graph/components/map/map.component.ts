@@ -46,7 +46,7 @@ export class MapComponent implements OnInit {
     map((points) =>
       points.map((p) =>
         L.marker([p.latitude, p.longtitude], {
-          title: p.name.replace('_', ' '),
+          title: `${p.name.replace('_', ' ')} \n ${p.weight / 100}`,
           opacity: 0.5,
           interactive: true,
         }).on('click', () => {
