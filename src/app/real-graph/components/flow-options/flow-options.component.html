@@ -1,0 +1,19 @@
+<form class="flow-options" [formGroup]="parent">
+  <app-autocomplete
+    [label]="'Starting point'"
+    [placeholder]="'Pick a city'"
+    [filterBy]="filterBy"
+    [displayWith]="displayWith"
+    [points]="points"
+    [control]="start"
+  ></app-autocomplete>
+
+  <app-autocomplete
+    [label]="'Ending point'"
+    [placeholder]="'Pick a city'"
+    [filterBy]="filterBy"
+    [displayWith]="displayWith"
+    [points]="points"
+    [control]="end"
+  ></app-autocomplete>
+</form>

@@ -1,0 +1,19 @@
+<mat-form-field class="autocomplete" appearance="fill">
+  <mat-label>{{ label }}</mat-label>
+  <input
+    matInput
+    type="text"
+    [placeholder]="placeholder"
+    [formControl]="control"
+    [matAutocomplete]="autocomplete"
+  />
+  <mat-autocomplete #autocomplete="matAutocomplete" [displayWith]="displayWith">
+    <mat-option *ngFor="let point of filteredPoints$ | async" [value]="point">
+      {{ point[filterBy] | name }}
+    </mat-option>
+  </mat-autocomplete>
+
+  <mat-error *ngIf="control.errors?.required">
+    This field is required
+  </mat-error>
+</mat-form-field>

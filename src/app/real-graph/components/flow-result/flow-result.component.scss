@@ -1,0 +1,17 @@
+.flow-result {
+  margin-top: 3rem;
+
+  &__label {
+    position: relative;
+    padding-top: 2rem;
+
+    &:before {
+      content: '';
+      width: 100%;
+      position: absolute;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+      left: 0;
+      top: 0;
+    }
+  }
+}

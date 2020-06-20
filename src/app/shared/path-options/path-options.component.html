@@ -1,26 +1,12 @@
 <form class="path-options" [formGroup]="parentForm">
-  <mat-form-field class="path-options__field" appearance="fill">
-    <mat-label>Starting point</mat-label>
-    <input
-      matInput
-      type="text"
-      placeholder="Pick a point"
-      [formControl]="startingPoint"
-      [matAutocomplete]="autocomplete"
-    />
-    <mat-autocomplete
-      #autocomplete="matAutocomplete"
-      [displayWith]="displayWith"
-    >
-      <mat-option *ngFor="let point of filteredPoints$ | async" [value]="point">
-        {{ point[filterBy] | name }}
-      </mat-option>
-    </mat-autocomplete>
-
-    <mat-error *ngIf="startingPoint.errors?.required">
-      This field is required
-    </mat-error>
-  </mat-form-field>
+  <app-autocomplete
+    [label]="'Starting point'"
+    [placeholder]="'Pick a point'"
+    [control]="startingPoint"
+    [points]="points"
+    [displayWith]="displayWith"
+    [filterBy]="filterBy"
+  ></app-autocomplete>
 
   <mat-form-field class="path-options__field" appearance="fill">
     <mat-label>Min. profit</mat-label>

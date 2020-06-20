@@ -16,8 +16,10 @@ export class RealGraphShellComponent implements OnInit, OnDestroy {
   loadingAlgorithm$ = this.query.loadingAlgorithm$;
 
   result$ = this.query.result$;
+  flowResult$: Observable<number>;
 
   pathForm: FormGroup;
+  flowForm: FormGroup;
   highlightedPointId$: Observable<number>;
 
   private subs = new Subscription();
@@ -33,13 +35,21 @@ export class RealGraphShellComponent implements OnInit, OnDestroy {
 
     this.pathForm = this.fb.group({
       startingPoint: [null, Validators.required],
-      minProfit: [125000, [Validators.required, Validators.min(1000)]],
+      minProfit: [
+        125000,
+        [Validators.required, Validators.min(10000), Validators.max(165000)],
+      ],
     });
     this.highlightedPointId$ = this.pathForm
       .get('startingPoint')
       .valueChanges.pipe(
         map((h) => (typeof h === 'string' ? +h : h ? +h.id : h))
       );
+
+    this.flowForm = this.fb.group({
+      start: [null, Validators.required],
+      end: [null, Validators.required],
+    });
   }
 
   ngOnDestroy() {
@@ -74,6 +84,17 @@ export class RealGraphShellComponent implements OnInit, OnDestroy {
       minProfit,
     } = this.pathForm.value;
     this.subs.add(this.service.vns(id, minProfit).subscribe());
+  }
+
+  runFlow() {
+    this.flowForm.get('start').updateValueAndValidity();
+    this.flowForm.get('end').updateValueAndValidity();
+    if (!this.flowForm.valid) {
+      return;
+    }
+
+    const { start, end } = this.flowForm.value;
+    this.flowResult$ = this.service.flow(start.id, end.id);
   }
 
   onPointSelect(point: Point) {

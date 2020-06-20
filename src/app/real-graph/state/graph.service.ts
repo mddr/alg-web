@@ -70,4 +70,12 @@ export class GraphService {
         })
       );
   }
+
+  flow(start: number, end: number): Observable<number> {
+    const params = new HttpParams()
+      .set('start', start.toString())
+      .set('end', end.toString());
+
+    return this.http.get<number>(`${environment.apiUrl}/path/flow`, { params });
+  }
 }

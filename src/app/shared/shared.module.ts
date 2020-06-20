@@ -12,6 +12,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { ProgressComponent } from './progress/progress.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { AutocompleteComponent } from './autocomplete/autocomplete.component';
 
 const MODULES = [FormsModule, ReactiveFormsModule];
 
@@ -23,6 +25,7 @@ const MATERIAL = [
   MatProgressBarModule,
   MatProgressSpinnerModule,
   MatTooltipModule,
+  MatExpansionModule,
 ];
 
 @NgModule({
@@ -31,6 +34,7 @@ const MATERIAL = [
     PathOptionsComponent,
     NamePipe,
     ProgressComponent,
+    AutocompleteComponent,
   ],
   imports: [CommonModule, ...MODULES, ...MATERIAL],
   exports: [
@@ -38,6 +42,7 @@ const MATERIAL = [
     PathOptionsComponent,
     NamePipe,
     ProgressComponent,
+    AutocompleteComponent,
     ...MODULES,
     ...MATERIAL,
   ],
